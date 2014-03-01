@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- html manifest="manifest.php" xmlns="http://www.w3.org/1999/xhtml" -->
+<!-- html manifest="manifest.txt" xmlns="http://www.w3.org/1999/xhtml" -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1,
+       maximum-scale=1, user-scalable=0">
+
+<style>
+  .bold {
+    font-weight: bold;
+  }
+</style>
+
+<!-- Style sheets for the JQuery and the "apple look" -->
+<!-- I think, we can get rid of the apple look and adopt
+	more to the more general, new as of iOS 7 look -->
+  <link rel="stylesheet" href="css/jquery.mobile.css" />
+  <link rel="stylesheet" href="css/colors.css">
+  
+	<!link rel="stylesheet" href="css/jqt/jqtouch.css"
+ 		type="text/css" media="screen" title="no title" charset="utf-8">
+	<!link rel="stylesheet" href="css/jqt/vanilla.css"
+		type="text/css" media="screen" title="no title" charset="utf-8">
+	<!-- link rel="stylesheet" href="css/jqt/apple.css"
+		type="text/css" media="screen" title="no title"
+		charset="utf-8" -->
+  
+	<!-- Honestly, I have not clue why we need 6 (!) different
+	jQuery scripts and what happens where and whether they
+	possible infere with each other in a bad way or not -->
+  	<!-- jQuery -->
+  <script src="scripts/jquery-latest.js"></script>
+  <script src="scripts/jquery.mobile.js"></script>
+  <!-- script src="scripts/jqt/jqtouch-jquery.js"
+		  type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/jqt/jqtouch-jquery.min.js"
+		  type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/jqt/jqtouch.js"
+		  type="text/javascript" charset="utf-8"></script>
+  <script src="scripts/jqt/jqtouch.min.js"
+		  type="text/javascript" charset="utf-8"></script -->
+ 
+  
+  <!-- The application's script -->
+  <script src="scripts/mycalcs.js"></script>
+  
+  <!-- Icons -->
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+
+  <title>Your Power (3)</title>
+</head>
+<body>
+
+<!-- div data-role="page" data-theme="b" id="page1" -->
+
+	<div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
+    <h1>Your Power 3</h1>
+	</div>
+
+	<div data-role="content" id="contentMain" name="contentMain">	
+
+  <form id="checkCorrect">
+      <div class="regular2" data-role="fieldcontain">
+
+	  <label class="bold">Weight: <span id="weightNumber"></span>
+				  kg &nbsp; &nbsp; &nbsp;</label> 
+	  <span id="dynWeight"></span><br /><br />
+	  <label class="bold">Inclination: <span id="inclinationNumber">
+	  		</span> % </label>
+	  <span id="dynInclination"></span><br /><br />
+      <label class="bold">Speed: <span id="speedNumber"></span> km/h</label>
+	  <span id="dynSpeed"></span><br /><br />
+      <label class="bold">CRR: <span id="crrNumber"></span> </label>
+	  <span id="dynCrr"></span><br /><br />
+      <label class="bold">Position: </label>
+	  <span id="dynSpan"></span>
+    </div>
+  </form>
+  
+
+  <label class="bold">Power: </label><label class="bold" id="value"></label>
+
+  </div><!-- contentMain -->
+
+  <div data-role="footer" class="footer" id="ftrMain" name="ftrMain">
+    &copy; Eggler Mobile Apps 2013</div>
+<!-- /div --> <!-- page1 -->
+	
+	
+</body>
+</html>
