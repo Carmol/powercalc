@@ -48,6 +48,8 @@ function loadData() {
 	position = localStorage.position;
 	
 	$('#weightNumber').text(weight);
+    // Here we just have to change the input type to something more
+    // suitable.
 	$('#dynWeight').html('<input type="range" min="40" max="150" id="weight"'
         + ' onChange="setValues()" onBlur="setPower()" value="'
 		+ weight + '"/>');
