@@ -15,7 +15,7 @@ var position;
 $(document).ready(function() {
 
 	window.addEventListener("onload", init, false);
-	window.addEventListener("onbeforeunload", beforeUnLoad, false);
+	//window.addEventListener("onbeforeunload", beforeUnLoad, false);
 
 	init();
 });
@@ -36,23 +36,9 @@ function init() {
 	}
 }
 
-function beforeUnLoad() {
+/*function beforeUnLoad() {
 	alert("Before unLoad()");
-}
-
-/*
-function getCrrText(crr) {
-	
-	var tCrr = "" + crr;
-	var retCrr = "" + crr;
-	
-	for (var i = 0; i < 7 - tCrr.length; i++) {
-		retCrr += "0";
-	}
-	
-	return retCrr;
-}
-*/
+}*/
 
 function loadData() {
 	weight = checkRange(localStorage.weight);
@@ -62,26 +48,36 @@ function loadData() {
 	position = localStorage.position;
 	
 	$('#weightNumber').text(weight);
-	$('#dynWeight').html('<input type="range" min="40" max="150" id="weight" onChange="setValues()" onBlur="setPower()" value="'
+	$('#dynWeight').html('<input type="range" min="40" max="150" id="weight"'
+        + ' onChange="setValues()" onBlur="setPower()" value="'
 		+ weight + '"/>');
 		
 	$('#inclinationNumber').text(inclination);
-	$('#dynInclination').html('<input type="range" min="-5" max="30" id="inclination" onBlur="setPower()" onChange="setValues()" value="'
+	$('#dynInclination').html('<input type="range" min="-5" max="30" id="inclination"'
+        + ' onBlur="setPower()" onChange="setValues()" value="'
 		+ inclination + '" />');
 		
 	$('#speedNumber').text(speed);
-	$('#dynSpeed').html('<input type="range" min="0" max="80" id="speed" onBlur="setPower()" onChange="setValues()" value="'
+	$('#dynSpeed').html('<input type="range" min="0" max="80" id="speed" onBlur="setPower()"'
+        + ' onChange="setValues()" value="'
 		+ speed + '" />');
 		
 	$('#crrNumber').text(crr);
 	$('#dynCrr').html('<input type="range" min="0.0" max="0.01" step="0.001" id="crr" onBlur="setPower()" onChange="setValues()" value="'
 		+ crr + '" width="300" height="10jj"/>');
 		
-	var positionChoiceHTML = '<select name="position" id="position" onBlur="setPower()" onChange="setPower()">';
+	var positionChoiceHTML = '<select name="position" id="position"'
+        + ' onBlur="setPower()" onChange="setPower()">';
 	
-	positionChoiceHTML += (position == "up" ? '<option value="up" selected>Upright</option>' : '<option value="up">Upright</option>');
-	positionChoiceHTML += (position == "brake_levers" ? '<option value="brake_levers" selected>Brake levers</option>' : '<option value="brake_levers">Brake levers</option>');
-	positionChoiceHTML += (position == "bend" ? '<option value="bend" selected>Bend</option>' : '<option value="bend">Bend</option>');
+	positionChoiceHTML += (position == "up"
+        ? '<option value="up" selected>Upright</option>'
+        : '<option value="up">Upright</option>');
+	positionChoiceHTML += (position == "brake_levers"
+        ? '<option value="brake_levers" selected>Brake levers</option>'
+        : '<option value="brake_levers">Brake levers</option>');
+	positionChoiceHTML += (position == "bend"
+        ? '<option value="bend" selected>Bend</option>'
+        : '<option value="bend">Bend</option>');
 	positionChoiceHTML += "</select>"	
 	$('#dynSpan').html(positionChoiceHTML);
 		
@@ -99,7 +95,7 @@ function checkRange(value) {
 	return value;
 }
 
-function safeValues() {  
+function storeValues() {  
 	localStorage.setItem("weight", weight);
 	localStorage.setItem("inclination", inclination);
 	localStorage.setItem("speed", speed);
@@ -160,7 +156,7 @@ function setPower() {
 	+ " w").show();
 	$('#position').selectedIndex = getPositionIndex(position);
 
-	safeValues();
+	storeValues();
 }
 
 function isNumber(toCheck) {
