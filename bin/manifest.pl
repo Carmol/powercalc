@@ -18,6 +18,13 @@ sub list_dirs {
     return @files;
 }
 
+sub must_be_omitted {
+    my $file = shift;
+    
+    return -d $file or file eq '../manifest.php' or $file eq '../README.md'
+        or $file =~ /^\.\.\/bin';
+}
+
 sub main {
     while (FCGI::accept >= 0) {
         print "Content-type: text/cache-manifest\r\n";
@@ -29,20 +36,10 @@ sub main {
 
 dir_entry:
         for my $entry (list_dirs('..')) {
+            if (must_be_omitted($entry) {               next dir_entry; }
 
-            if (-d $entry) { next dir_entry; }
-
-            my $original_file_name = $entry;
-
+            $hashes .= file_md5_hex($entry);
             $entry =~ s/^\.\.\///;
-            if ($entry =~ /^\./
-                    or $entry eq '..'
-                    or $entry eq 'manifest.php'
-                    or $entry eq 'README.md'
-                    or $entry =~ /^bin/)
-            {    next dir_entry; } 
-
-            $hashes .= file_md5_hex($original_file_name);
             print $entry, "\n";
         }
 
