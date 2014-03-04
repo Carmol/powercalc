@@ -31,14 +31,6 @@ sub must_be_shown {
     }
 
     return 1;
- 
-    ## ugly hack; do not know, what I did wrong...
-    #return 0 if $file =~ /^\.\.\/\./;
-    #return 0 if $file =~ /^\.\.\/bin/;
-    #return 0 if -d $file or $file eq '../manifest.php' or $file eq '../README.md'
-    #    or $file =~ /^\.\.\/bin/;
-
-    #return 1;
 }
 
 sub main {
