@@ -18,21 +18,22 @@ sub list_dirs {
     return @files;
 }
 
-sub must_be_omitted {
+sub must_be_shown {
     my $file = shift;
  
     # ugly hack; do not know, what I did wrong...
-    my $found = $file =~ /^\.\.\/\./;
-    return 1 if $found;
-
-    return -d $file or $found or $file eq '../manifest.php' or $file eq '../README.md'
+    return 0 if $file =~ /^\.\.\/\./;
+    return 0 if $file =~ /^\.\.\/bin/;
+    return 0 if -d $file or $file eq '../manifest.php' or $file eq '../README.md'
         or $file =~ /^\.\.\/bin/;
+
+    return 1;
 }
 
 sub main {
     while (FCGI::accept >= 0) {
-        print 'Content-type: text/cache-manifest\n';
-        print 'Status: 200 OK\n\n';
+        print "Content-type: text/cache-manifest\n";
+        print "Status: 200 OK\n\n";
 
         print "CACHE MANIFEST\n";
 
@@ -40,11 +41,11 @@ sub main {
 
 dir_entry:
         for my $entry (list_dirs('..')) {
-            if (must_be_omitted($entry)) {               next dir_entry; }
-
-            $hashes .= file_md5_hex($entry);
-            $entry =~ s/^\.\.\///;
-            print $entry, "\n";
+            if (must_be_shown($entry)) {
+                $hashes .= file_md5_hex($entry);
+                $entry =~ s/^\.\.\///;
+                print $entry, "\n";
+            }
         }
 
         print "# Hash: " . md5_base64($hashes) . "\n";
