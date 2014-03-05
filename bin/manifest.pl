@@ -42,7 +42,6 @@ sub main {
 
         my $hashes = "";
 
-dir_entry:
         for my $entry (list_dirs('..')) {
             if (must_be_shown($entry)) {
                 $hashes .= file_md5_hex($entry);
