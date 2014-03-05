@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html manifest="bin/manifest.pl" xmlns="http://www.w3.org/1999/xhtml" -->
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1,
-       maximum-scale=1, user-scalable=0">
+        <meta name="viewport" content="width=device-width, initial-scale=1,
+        maximum-scale=1, user-scalable=0">
 
-<style>
-  .bold {
-    font-weight: bold;
-  }
-</style>
+        <style>
+            .bold {
+                font-weight: bold;
+            }
+        </style>
 
-<!-- Style sheets for the JQuery and the "apple look" -->
-<!-- I think, we can get rid of the apple look and adopt
-	more to the more general, new as of iOS 7 look -->
-<link rel="stylesheet" href="css/jquery.mobile.css" />
-<link rel="stylesheet" href="css/colors.css">
-  
-<!-- jQuery -->
-<script src="scripts/jquery-latest.js"></script>
-<script src="scripts/jquery.mobile.js"></script>
+        <!-- Style sheets for the JQuery and the "apple look" -->
+        <!-- I think, we can get rid of the apple look and adopt
+        more to the more general, new as of iOS 7 look -->
+        <link rel="stylesheet" href="css/jquery.mobile.css" />
+        <link rel="stylesheet" href="css/colors.css">
 
-<!-- The application's script -->
-<script src="scripts/mycalcs.js"></script>
-  
-<!-- Icons -->
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
+        <!-- jQuery -->
+        <script src="scripts/jquery-latest.js"></script>
+        <script src="scripts/jquery.mobile.js"></script>
 
-<title>Your Power</title>
-</head>
-<body>
+        <!-- The application's script -->
+        <script src="scripts/mycalcs.js"></script>
 
-<!-- div data-role="page" data-theme="b" id="page1" -->
+        <!-- Icons -->
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114.png">
 
-<div data-role="header" id="hdrMain" name="hdrMain" data-nobackbtn="true">
-    <h1>Your Power</h1>
-</div>
+        <title>Your Power</title>
+    </head>
+    <body>
 
-<div data-role="content" id="contentMain" name="contentMain">	
+        <!-- div data-role="page" data-theme="b" id="page1" -->
 
-	<form id="checkCorrect">
-  	<div class="regular2" data-role="fieldcontain">
-	  	<label class="bold">Weight: <span id="weightNumber"></span>
-			  kg &nbsp; &nbsp; &nbsp;</label> 
-	  	<span id="dynWeight"></span><br /><br />
-	  	<label class="bold">Inclination: <span id="inclinationNumber">
-	  	</span> % </label>
-	  	<span id="dynInclination"></span><br /><br />
-      	<label class="bold">Speed: <span id="speedNumber"></span> km/h</label>
-	  	<span id="dynSpeed"></span><br /><br />
-      	<label class="bold">CRR: <span id="crrNumber"></span> </label>
-	  	<span id="dynCrr"></span><br /><br />
-      	<label class="bold">Position: </label>
-	  	<span id="dynSpan"></span>
-    </div>
-	</form>
-  
+        <div data-role="header" id="header_main" name="header_main"
+            data-nobackbtn="true" text-align="center">
+            <label><h1 id="power_title">Your Power</h1></label>
+        </div>
 
-	<label class="bold">Power: </label><label class="bold" id="value"></label>
+        <div data-role="content" id="contentMain" name="contentMain">	
 
-</div><!-- contentMain -->
+            <form id="checkCorrect">
+                <div class="regular2" data-role="fieldcontain">
+                    <label class="bold">Weight: <span id="weightNumber"></span>
+                        kg &nbsp; &nbsp; &nbsp;</label> 
+                    <span id="dynWeight"></span><br /><br />
+                    <label class="bold">Inclination: <span id="inclinationNumber">
+                    </span> % </label>
+                    <span id="dynInclination"></span><br /><br />
+                    <label class="bold">Speed: <span id="speedNumber"></span> km/h</label>
+                    <span id="dynSpeed"></span><br /><br />
+                    <label class="bold">CRR: <span id="crrNumber"></span> </label>
+                    <span id="dynCrr"></span><br /><br />
+                    <label class="bold">Position: </label>
+                    <span id="dynSpan"></span>
+                </div>
+            </form>
 
-<div data-role="footer" class="footer" id="ftrMain" name="ftrMain">
-    &copy; ECZ Mobile Apps 2014</div>
-<!-- /div --> <!-- page1 -->
-</body>
+
+            <label class="bold">Power: </label><label class="bold" id="value"></label>
+
+        </div><!-- contentMain -->
+
+        <div data-role="footer" class="footer" id="ftrMain" name="ftrMain">
+            &copy; ECZ Mobile Apps 2014</div>
+        <!-- /div --> <!-- page1 -->
+    </body>
 </html>

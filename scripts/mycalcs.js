@@ -51,25 +51,22 @@ function loadData() {
     // Here we just have to change the input type to something more
     // suitable.
 	$('#dynWeight').html('<input type="range" min="40" max="150" id="weight"'
-        + ' onChange="setValues()" onBlur="setPower()" value="'
-		+ weight + '"/>');
+        + ' onChange="setValues()" value="' + weight + '" step="5"/>');
 		
 	$('#inclinationNumber').text(inclination);
-	$('#dynInclination').html('<input type="range" min="-5" max="30" id="inclination"'
-        + ' onBlur="setPower()" onChange="setValues()" value="'
-		+ inclination + '" />');
+	$('#dynInclination').html('<input type="range" min="-5" max="15" id="inclination"'
+        + ' onChange="setValues()" value="' + inclination + '" step="0.5" />');
 		
 	$('#speedNumber').text(speed);
-	$('#dynSpeed').html('<input type="range" min="0" max="80" id="speed" onBlur="setPower()"'
-        + ' onChange="setValues()" value="'
-		+ speed + '" />');
+	$('#dynSpeed').html('<input type="range" min="5" max="50" id="speed" '
+        + ' onChange="setValues()" value="' + speed + '" step="1"/>');
 		
 	$('#crrNumber').text(crr);
-	$('#dynCrr').html('<input type="range" min="0.0" max="0.01" step="0.001" id="crr" onBlur="setPower()" onChange="setValues()" value="'
-		+ crr + '" width="300" height="10jj"/>');
+	$('#dynCrr').html('<input type="range" min="0.002" max="0.004" step="0.0005" id="crr"'
+        + ' onChange="setValues()" value="' + crr + '" width="300" height="10" />');
 		
 	var positionChoiceHTML = '<select name="position" id="position"'
-        + ' onBlur="setPower()" onChange="setPower()">';
+        + ' onChange="setPower()">';
 	
 	positionChoiceHTML += (position == "up"
         ? '<option value="up" selected>Upright</option>'
@@ -83,7 +80,7 @@ function loadData() {
 	positionChoiceHTML += "</select>"	
 	$('#dynSpan').html(positionChoiceHTML);
 		
-	$('#value').text(calculatePower(weight, speed, inclination, crr, position)
+	$('#power_title').text(calculatePower(weight, speed, inclination, crr, position)
 	+ " w").show();
 
 	return true;
@@ -149,16 +146,23 @@ function setValues() {
 	$('#speedNumber').text(speed);
 	
 	setPower();
+
+	$('#weightNumber').text(weight);
+	$('#inclinationNumber').text(inclination);
+	$('#crrNumber').text(crr);
+	$('#speedNumber').text(speed);
 }
 
 function setPower() {
-	setParameters();
+    setParameters();
 
-	$('#value').text(calculatePower(weight, speed, inclination, crr, position)
-	+ " w").show();
-	$('#position').selectedIndex = getPositionIndex(position);
+    $('#value').text(calculatePower(weight, speed, inclination, crr, position)
+            + " w").show();
+    $('#position').selectedIndex = getPositionIndex(position);
+    $('#power_title').text(calculatePower(weight, speed, inclination, crr, position)
+            + " w").show();
 
-	storeValues();
+    storeValues();
 }
 
 function isNumber(toCheck) {
@@ -171,32 +175,32 @@ function isNumber(toCheck) {
 	}
 }
 
-
+// The math
 function pRollingResistance(weight, spd, grade, crr, position) {
-	
-	return crr * weight * NEWTON_CONSTANT * spd;
+
+    return crr * weight * NEWTON_CONSTANT * spd;
 }
 
 function pWind(weight, spd, grade, crr, position) {
 
-	var Cd = 0.45;
-	var A = 0.5;
+    var Cd = 0.45;
+    var A = 0.5;
 
-	if (position == "up")          { Cd = 0.5; A = 0.6;  }
-	if (position == "braek_lever") { Cd = 0.45; A = 0.5;  }
-	if (position == "bend")        { Cd = 0.4; A = 0.45; }
-		
-	return /* 0.5 * */ AIR_DENSITY_CONSTANT * spd * spd * spd * Cd * A;
+    if (position == "up")          { Cd = 0.5; A = 0.6;  }
+    if (position == "braek_lever") { Cd = 0.45; A = 0.5;  }
+    if (position == "bend")        { Cd = 0.4; A = 0.45; }
+
+    return /* 0.5 * */ AIR_DENSITY_CONSTANT * spd * spd * spd * Cd * A;
 }
 
 function pGravity(weight, spd, grade, crr, position) {
-	
-	return weight * NEWTON_CONSTANT * Math.sin(Math.atan(grade)) * spd;
+
+    return weight * NEWTON_CONSTANT * Math.sin(Math.atan(grade)) * spd;
 }
 
 function pAcceleration(weight, spd, grade, crr, position) {
-	// We don't calculate this
-	return 0;
+    // We don't calculate this
+    return 0;
 }
 
 // ******************************************************************

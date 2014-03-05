@@ -3,3 +3,13 @@ label.missing  {
 	font-weight:bold;
 }
 
+div.header_main {
+    color: #00FFFF;
+    font-weight: bold;
+    text-align: center;
+
+    font-size: 1.5em;
+}
+
+
+
