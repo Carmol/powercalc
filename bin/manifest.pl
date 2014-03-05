@@ -10,7 +10,8 @@ use File::Find;
 use Digest::MD5 qw( md5 md5_base64 );
 use Digest::MD5::File qw(dir_md5_hex file_md5_hex url_md5_hex);
 
-Readonly::Array my @ignore_items => qw( ../. ../bin ../README.md );
+Readonly::Array  my @ignore_items   => qw( ../. ../bin ../README.md );
+Readonly::Scalar my $root_directory => '..';
 
 sub list_dirs {
     my @dirs = shift;
@@ -42,7 +43,6 @@ sub main {
 
         my $hashes = "";
 
-dir_entry:
         for my $entry (list_dirs('..')) {
             if (must_be_shown($entry)) {
                 $hashes .= file_md5_hex($entry);
