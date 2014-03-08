@@ -15,8 +15,6 @@ var position;
 $(document).ready(function() {
 
     window.addEventListener("onload", init, false);
-    //window.addEventListener("onbeforeunload", beforeUnLoad, false);
-
     init();
 });
 
