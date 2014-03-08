@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use Readonly;
-use FCGI;
+#use FCGI;
 use Carp;
 use File::Find;
 use Digest::MD5 qw( md5 md5_base64 );
@@ -35,7 +35,10 @@ sub must_be_shown {
 }
 
 sub main {
-    while (FCGI::accept >= 0) {
+# I don't think we need FCGI here. This is neither a resource nor a
+# performance problem, but makes installation way easier. I wonder,
+# though, whether the php version wouldn't even more portable.
+#    while (FCGI::accept >= 0) {
         print "Content-type: text/cache-manifest\n";
         print "Status: 200 OK\n\n";
 
@@ -52,7 +55,7 @@ sub main {
         }
 
         print "# Hash: " . md5_base64($hashes) . "\n";
-    }
+#    }
 }
 
 main();
