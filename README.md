@@ -3,6 +3,13 @@ powercalc - newgui (2)
 HTML5 based bicycle tools for mobile devices to calculate power related parameters
 More info to come, soon.
 
+'newgui'
+--------
+The idea is to finally improve the gui. It must fulfill:
+- Usable on smartphones
+- Looks better
+  ==> Some CSS exercises look advisable.
+
 Open Items
 ==========
 - GUI
