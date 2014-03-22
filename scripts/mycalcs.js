@@ -15,10 +15,6 @@ var position;
 $(document).ready(function() {
 
     window.addEventListener("onload", init, false);
-    //window.addEventListener("onbeforeunload", beforeUnLoad, false);
-    
-    //document.documentElement.requestFullScreen();
-
     init();
 });
 
@@ -37,10 +33,6 @@ function init() {
         }
     }
 }
-
-/*function beforeUnLoad() {
-  alert("Before unLoad()");
-  }*/
 
 function loadData() {
     weight = checkRange(localStorage.weight);
@@ -133,7 +125,6 @@ function setParameters() {
 
 
 function getPositionIndex(pos) {
-
     if (position == "up") return 0;
     if (position == "brake_levers") return 1;
     if (position == "bend") return 2;
@@ -141,7 +132,6 @@ function getPositionIndex(pos) {
 
 
 function setValues() {
-
     $('#weightNumber').text(weight);
     $('#inclinationNumber').text(inclination);
     $('#crrNumber').text(crr);
@@ -149,6 +139,8 @@ function setValues() {
 
     setPower();
 
+    // It seems that a second call is necessary to update the screen
+    // completely. Will have to have a look into this later.
     $('#weightNumber').text(weight);
     $('#inclinationNumber').text(inclination);
     $('#crrNumber').text(crr);
@@ -168,7 +160,6 @@ function setPower() {
 }
 
 function isNumber(toCheck) {
-
     if (/[0-9\.\-]/.test(toCheck)) {
         return true;
     }
@@ -179,12 +170,10 @@ function isNumber(toCheck) {
 
 // The math
 function pRollingResistance(weight, spd, grade, crr, position) {
-
     return crr * weight * NEWTON_CONSTANT * spd;
 }
 
 function pWind(weight, spd, grade, crr, position) {
-
     var Cd = 0.45;
     var A = 0.5;
 
@@ -200,19 +189,12 @@ function pGravity(weight, spd, grade, crr, position) {
     return weight * NEWTON_CONSTANT * Math.sin(Math.atan(grade)) * spd;
 }
 
-function pAcceleration(weight, spd, grade, crr, position) {
-    // We don't calculate this
-    return 0;
-}
-
 // ******************************************************************
 function calculatePower(weight, spd, inclination, crr, position) {
-
     var calc_speed = 1000 * spd / 3600;
     var calc_inclination = inclination / 100; // percent
 
     return Number((pRollingResistance(weight, calc_speed, calc_inclination, crr, position)
                 + pWind(weight, calc_speed, calc_inclination, crr, position)
-                + pGravity(weight, calc_speed, calc_inclination, crr, position)
-                + pAcceleration(weight, calc_speed, calc_inclination, crr, position)).toFixed(0));
+                + pGravity(weight, calc_speed, calc_inclination, crr, position);
 }
