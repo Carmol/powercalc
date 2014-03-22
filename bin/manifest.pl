@@ -4,30 +4,36 @@ use strict;
 use warnings;
 
 use Readonly;
-use FCGI;
+#use FCGI;
 use Carp;
 use File::Find;
 use Digest::MD5 qw( md5 md5_base64 );
 use Digest::MD5::File qw(dir_md5_hex file_md5_hex url_md5_hex);
+use Method::Signatures;
+use English qw( -no_match_vars);
+use Fatal qw( open close );
 
-Readonly::Array  my @ignore_items   => qw( ../. ../bin ../README.md );
-Readonly::Scalar my $root_directory => '..';
+use feature qw(say switch);
 
-sub list_dirs {
-    my @dirs = shift;
+Readonly::Scalar our $VERSION        => '0.1.7';
+Readonly::Array  my  @IGNORE_ITEMS   => qw( ../. ../bin ../README.md ../manifest.php );
+Readonly::Scalar my  $ROOT_DIRECTORY => q/../;
+Readonly::Scalar my  $EMPTY          => q//;
+
+func list_dirs($dir) {
     my @files;
 
-    find ({ 'wanted' => sub { push @files, $_ }, no_chdir => 1 }, @dirs);
+    find ({ 'wanted' => sub { push @files, $ARG }, no_chdir => 1 },
+        ($dir));
 
     return @files;
 }
 
-sub must_be_shown {
-    my $file = shift;
+func must_be_shown($file) {
 
     return 0 if -d $file;
 
-    for my $item (@ignore_items) {
+    for my $item (@IGNORE_ITEMS) {
         return 0 if substr($file, 0, length($item)) eq $item;
     }
 
@@ -35,25 +41,125 @@ sub must_be_shown {
 }
 
 sub main {
-    while (FCGI::accept >= 0) {
-        print "Content-type: text/cache-manifest\n";
-        print "Status: 200 OK\n\n";
+    #    while (FCGI::accept >= 0) {
+    say 'Content-type: text/cache-manifest';
+    say 'Status: 200 OK';
+    say $EMPTY;
+    say 'CACHE MANIFEST';
 
-        print "CACHE MANIFEST\n";
+    my $hashes = $EMPTY;
 
-        my $hashes = "";
-
-        for my $entry (list_dirs('..')) {
-            if (must_be_shown($entry)) {
-                $hashes .= file_md5_hex($entry);
-                $entry =~ s/^\.\.\///;
-                print $entry, "\n";
-            }
+    for my $entry (list_dirs($ROOT_DIRECTORY)) {
+        if (must_be_shown($entry)) {
+            $hashes .= file_md5_hex($entry);
+            $entry =~ s/^[.][.]\///xms;
+            say $entry;
         }
-
-        print "# Hash: " . md5_base64($hashes) . "\n";
     }
+
+    say '# Hash: ' . md5_base64 $hashes;
+    #}
 }
 
 main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
