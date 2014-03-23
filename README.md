@@ -16,4 +16,3 @@ Purpose
 Have a little HTML5 based application that calculates power by entering the other relevant parameters (weight, crr, inclination, sitting position, speed).
 Possibly have other similar functionality, too. E.g., calculating average power by the above parameters, but distance, time and elevation difference instead of speed and inclination.
 
-New
