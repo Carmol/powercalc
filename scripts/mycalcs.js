@@ -1,3 +1,5 @@
+"use strict";
+
 var NEWTON_CONSTANT = 9.81;
 
 // Air density should be a form input parameter
@@ -9,6 +11,15 @@ var inclination;
 var speed;
 var crr;
 var position;
+
+function isNumber(number_to_check) {
+    return /[0-9\.\-]/.test(number_to_check) ? true : false;
+}
+
+function checkRange(value) {
+    return value && isNumber(value) ? 1 : 0;
+}
+
 
 // ******************************************************************
 // Document stuff
@@ -82,12 +93,6 @@ function loadData() {
 
 // ******************************************************************
 // Housekeeping of data and values
-function checkRange(value) {
-    if (!value || !isNumber(value)) value = 0;
-
-    return value;
-}
-
 function storeValues() {
     localStorage.setItem("weight", weight);
     localStorage.setItem("inclination", inclination);
@@ -157,15 +162,6 @@ function setPower() {
             + " w").show();
 
     storeValues();
-}
-
-function isNumber(toCheck) {
-    if (/[0-9\.\-]/.test(toCheck)) {
-        return true;
-    }
-    else {
-        return false;
-    }
 }
 
 // The math
