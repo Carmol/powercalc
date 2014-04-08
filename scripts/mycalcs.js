@@ -29,11 +29,11 @@ function setStatus(statusText) {
 // ******************************************************************
 function calculatePower(weight, spd, inclination, crr, position) {
     var calc_speed = 1000 * spd / 3600;
-    var calc_inclination = inclination / 100; // percent
+    var calc_inclination = inclination / 100; // inclination is in percent
 
-    return Number((pRollingResistance(weight, calc_speed, calc_inclination, crr, position)
+    return Number(pRollingResistance(weight, calc_speed, calc_inclination, crr, position)
                 + pWind(weight, calc_speed, calc_inclination, crr, position)
-                + pGravity(weight, calc_speed, calc_inclination, crr, position);
+                + pGravity(weight, calc_speed, calc_inclination, crr, position));
 }
 
 // ******************************************************************
@@ -165,7 +165,7 @@ function setPower() {
     setParameters();
 
     $('#position').selectedIndex = getPositionIndex(position);
-    $('#power_title').text(calculatePower(weight, speed, inclination, crr, position)
+    $('#power_title').text(Math.round(calculatePower(weight, speed, inclination, crr, position))
             + " w").show();
 
     storeValues();
