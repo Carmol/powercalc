@@ -125,9 +125,9 @@ function setParameters() {
 
 
 function getPositionIndex(pos) {
-    if (position == "up") return 0;
+    if (position == "up")           return 0;
     if (position == "brake_levers") return 1;
-    if (position == "bend") return 2;
+    if (position == "bend")         return 2;
 }
 
 
@@ -160,12 +160,8 @@ function setPower() {
 }
 
 function isNumber(toCheck) {
-    if (/[0-9\.\-]/.test(toCheck)) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return (/[0-9\.\-]/).test(toCheck);
+    
 }
 
 // The math
