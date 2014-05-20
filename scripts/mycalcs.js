@@ -191,10 +191,13 @@ function pGravity(weight, spd, grade, crr, position) {
 
 // ******************************************************************
 function calculatePower(weight, spd, inclination, crr, position) {
-    var calc_speed = 1000 * spd / 3600;
-    var calc_inclination = inclination / 100; // percent
+    var calc_speed       = 1000 * spd  / 3600; // km/h --> m/s
+    var calc_inclination = inclination /  100; // %    --> fraction
+    
+    var p_rr      = pRollingResistance(weight, calc_speed, calc_inclination, crr, position);
+    var p_wind    = pWind(weight, calc_speed, calc_inclination, crr, position);
+    var p_gravity = pGravity(weight, calc_speed, calc_inclination, crr, position);
+    
+    return Number(p_rr + p_wind + p_gravity);
 
-    return Number((pRollingResistance(weight, calc_speed, calc_inclination, crr, position)
-                + pWind(weight, calc_speed, calc_inclination, crr, position)
-                + pGravity(weight, calc_speed, calc_inclination, crr, position);
 }
