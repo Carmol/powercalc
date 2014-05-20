@@ -35,14 +35,14 @@ function init() {
 }
 
 function loadData() {
-    weight = checkRange(localStorage.weight);
-    speed = checkRange(localStorage.speed);
-    inclination = checkRange(localStorage.inclination);
-    crr = checkRange(localStorage.crr);
-    position = localStorage.position;
+    weight      = getValidValue(localStorage.weight);
+    speed       = getValidValue(localStorage.speed);
+    inclination = getValidValue(localStorage.inclination);
+    crr         = getValidValue(localStorage.crr);
+    position    = localStorage.position;
 
     $('#weightNumber').text(weight);
-    // Here we just have to change the input type to something more
+    // Here we just have to change the input type to something more
     // suitable.
     $('#dynWeight').html('<input type="range" min="40" max="150" id="weight"'
         + ' onChange="setValues()" value="' + weight + '" step="5"/>');
@@ -82,7 +82,7 @@ function loadData() {
 
 // ******************************************************************
 // Housekeeping of data and values
-function checkRange(value) {
+function getValidValue(value) {
     if (!value || !isNumber(value)) value = 0;
 
     return value;
