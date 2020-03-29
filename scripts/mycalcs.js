@@ -1,6 +1,6 @@
 var NEWTON_CONSTANT = 9.81;
 
-// Air density should be a form input parameter
+// Air density should be a form input parameter //
 var AIR_DENSITY_CONSTANT = 1.050;
 
 var localStorageAvailable = typeof(localStorage) != "undefined";
