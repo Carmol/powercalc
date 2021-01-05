@@ -195,5 +195,4 @@ function calculatePower(weight, spd, inclination, crr, position) {
     var p_gravity = pGravity(weight, calc_speed, calc_inclination, crr, position);
     
     return Number(p_rr + p_wind + p_gravity);
-
 }
